@@ -1,0 +1,45 @@
+-- CREATE DATABASE IF NOT EXISTS timeSys;
+
+CREATE DATABASE IF NOT EXISTS timeSys DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE timeSys;
+
+DROP TABLE IF EXISTS working_hours, users;
+CREATE TABLE users (
+    id INT(6) AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    user VARCHAR(20) UNIQUE NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE,
+    is_admin BOOLEAN NOT NULL DEFAULT false
+);
+CREATE TABLE working_hours (
+    id INT(6) AUTO_INCREMENT PRIMARY KEY, 
+    user_id INT(6),
+    work_date DATE NOT NULL,
+    time1 TIME,
+    time2 TIME,
+    time3 TIME,
+    time4 TIME,
+    worked_time INT,
+
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT cons_user_day UNIQUE (user_id, work_date)
+);
+
+-- Essa senha criptografada corresponde ao valor "a"
+INSERT INTO users (id, name, password, user, start_date, end_date, is_admin)
+VALUES (1, 'Admin', '$2y$10$/vC1UKrEJQUZLN2iM3U9re/4DQP74sXCOVXlYXe/j9zuv1/MHD4o.', 'admin', '2000-1-1', null, 1);
+
+INSERT INTO users (id, name, password, user, start_date, end_date, is_admin)
+VALUES (2, 'Chaves', '$2y$10$/vC1UKrEJQUZLN2iM3U9re/4DQP74sXCOVXlYXe/j9zuv1/MHD4o.', 'chaves', '2000-1-1', null, 1);
+
+INSERT INTO users (id, name, password, user, start_date, end_date, is_admin)
+VALUES (3, 'Seu Barriga', '$2y$10$/vC1UKrEJQUZLN2iM3U9re/4DQP74sXCOVXlYXe/j9zuv1/MHD4o.', 'barriga', '2000-1-1', null, 0);
+
+INSERT INTO users (id, name, password, user, start_date, end_date, is_admin)
+VALUES (4, 'Seu Madruga', '$2y$10$/vC1UKrEJQUZLN2iM3U9re/4DQP74sXCOVXlYXe/j9zuv1/MHD4o.', 'madruga', '2000-1-1', null, 0);
+
+INSERT INTO users (id, name, password, user, start_date, end_date, is_admin)
+VALUES (5, 'Quico', '$2y$10$/vC1UKrEJQUZLN2iM3U9re/4DQP74sXCOVXlYXe/j9zuv1/MHD4o.', 'quico', '2000-1-1', '2019-1-1', 0);
