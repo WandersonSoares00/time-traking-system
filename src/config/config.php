@@ -12,10 +12,13 @@ define("EXCEPTION_PATH",  realpath(dirname(__FILE__) . "/../exceptions"));
 
 // Files
 require_once(realpath(dirname(__FILE__) . '/Database.php'));
-include_once(realpath(dirname(__FILE__) . '/loader.php'));
-include_once(realpath(MODEL_PATH        . '/Model.php'));
-include_once(realpath(EXCEPTION_PATH    . '/AppException.php'));
+require_once(realpath(dirname(__FILE__) . '/loader.php'));
+require_once(realpath(dirname(__FILE__) . "/date_utils.php"));
+require_once(realpath(MODEL_PATH        . '/Model.php'));
+require_once(realpath(MODEL_PATH        . '/User.php'));
+require_once(realpath(MODEL_PATH        . '/Login.php'));
+require_once(realpath(MODEL_PATH        . '/WorkingHours.php'));
+require_once(realpath(EXCEPTION_PATH    . '/AppException.php'));
 
-// includes
-//echo realpath(MODEL_PATH . "/Login.php");
+
 //require_once (realpath(MODEL_PATH . "/Login.php"));
