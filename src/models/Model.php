@@ -10,10 +10,17 @@ class Model {
         $this -> load_from_array($arr);
     }
 
-    public function load_from_array($arr) {
-        if ($arr) {
-            foreach ($arr as $key => $value) {
-                $this -> $key = $value; // i.e, values[$key] = $value;
+    public function load_from_array($arr, $sanitize = true) {
+        if($arr) {
+            foreach($arr as $key => $value) {
+                
+                $cleanValue = $value;
+
+                if($sanitize && isset($cleanValue)) {                    
+                    $cleanValue = strip_tags(trim($cleanValue));
+                    $cleanValue = htmlentities($cleanValue, ENT_NOQUOTES);                    
+                }
+                $this->$key = $cleanValue;
             }
         }
     }
@@ -38,6 +45,10 @@ class Model {
         }
 
         return $objects;
+    }
+
+    public function getValues() {
+        return $this->values;
     }
 
     public static function get_one($filters = [], $columns = "*") {
@@ -89,6 +100,23 @@ class Model {
 
         $sql[strlen($sql) - 1] = " ";
         $sql .= " WHERE id = {$this->id}";
+        
+        Database::executeSQL($sql);
+    }
+
+    public static function getCount($filters = []) {
+        $result = static::get_result_set_from_select(
+            $filters, 'count(*) as count');
+        return $result->fetch_assoc()['count'];
+    }
+
+    public function delete() {
+        static::deleteById($this->id);
+    }
+
+    public static function deleteById($id) {
+        
+        $sql = "DELETE FROM " . static::$tableName . " WHERE id = {$id}";
         
         Database::executeSQL($sql);
     }

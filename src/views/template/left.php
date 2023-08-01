@@ -37,32 +37,14 @@
             <i class="icon icofont-hour-glass text-primary"></i>
             <div class="info">
                 <span class="main text-primary"
-
-
-                    <?= $_SESSION['activeC'] === $_SESSION['workI'] ? $_SESSION['activeC'] : '' ?>>
-
-
-                    <?= $_SESSION['workI'] ?>
+                
+                <?= $activeClock === 'workedInterval' ? 'active-clock' : '' ?>
+                >    
+                    <?= $workedInterval ?>
                 </span>
                 <span class="label text-muted">Horas Trabalhadas</span>
             </div>
         </div>
         
-        <div class="division my-3"></div>
-        <div class="sidebar-widget">
-            <i class="icon icofont-ui-alarm text-danger"></i>
-            <div class="info">
-                <span class="main text-danger"
-
-
-                    <?= $_SESSION['activeC'] === $_SESSION['exitT'] ? $_SESSION['activeC'] : '' ?>>
-
-
-
-                    <?= $_SESSION['exitT'] ?>
-                </span>
-                <span class="label text-muted">Hora de Saída</span>
-            </div>
-        </div>
     </div>
 </aside>

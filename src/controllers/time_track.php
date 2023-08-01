@@ -16,7 +16,7 @@ try{
     $currentDateTime = new DateTime(); // Cria um objeto DateTime com a data e hora atuais
 
     $currentTime = $currentDateTime->format('H:i:s'); // Formata a hora como 'HH:ii:ss'
-
+    
     $records -> register_time($currentTime);
     
     $_SESSION["message"] = [
@@ -29,15 +29,5 @@ catch (AppException $event) {
     ];
 }
 
-$_GLOBALS['time1'] = $records->time1;
-$_GLOBALS['time2'] = $records->time2;
-$_GLOBALS['time3'] = $records->time3;
-$_GLOBALS['time4'] = $records->time4;
 
-//$workingHours = WorkingHours::loadFromUserAndDate($user->id, date("Y-m-d"));
-//$workedInterval = $workingHours->getWorkedInterval()->format("%H:%I:%S");
-//$exitTime = $workingHours->getExitTime()->format("H:i:s");
-//$activeClock = $workingHours->getActiveClock();
-
-
-header('Location: ../views/day_records.php');
+header('Location: day_records.php');
