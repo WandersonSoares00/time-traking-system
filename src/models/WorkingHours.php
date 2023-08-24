@@ -69,6 +69,12 @@ class WorkingHours extends Model {
 
         $this->$timeColumn = $time;
         $this->worked_time = getSecondsFromDateInterval($this->getWorkedInterval());
+        
+        if ($this->worked_time >= 36000){   //Impede o registro de mais de 10 horas trabalhadas
+            $this->worked_time = 0;
+            $this->id ? $this->update() : $this->insert();
+            throw new AppException("Registro de horário inválido.");
+        }
 
         $this->id ? $this->update() : $this->insert();
     }

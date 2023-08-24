@@ -63,7 +63,6 @@
 				<th>Saída 1</th>
 				<th>Entrada 2</th>
 				<th>Saída 2</th>
-				<th>Saldo</th>
 			</thead>
 			<tbody>
 				<?php
@@ -78,7 +77,6 @@
 						<td><?= $registry->time2 ?></td>
 						<td><?= $registry->time3 ?></td>
 						<td><?= $registry->time4 ?></td>
-						<td><?= '--' /*$registry->getBalance()*/ ?></td>
 
 					</tr>
 				<?php
@@ -86,17 +84,12 @@
 			    ?>
 				<tr class="bg-primary text-white">
 					<td>Horas Trabalhadas</td>
-					<td colspan="3"><?=
+					<td colspan="4" class="text-right"><?=
 					                   //imprimindo o total de horas trabalhadas no mês   
 					                   //a variável $sumOfWorkedTime vem do controller
 					                   $sumOfWorkedTime
 					                ?></td>
-					<td>Saldo Mensal</td>
-					<td><?=
-                            //imprimindo o saldo de horas em relação ao esperado
-                            //a variável $balance vem do controller
-                            $balance
-                        ?></td>
+					
 				</tr>
 			</tbody>	
 		</table>

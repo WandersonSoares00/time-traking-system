@@ -3,9 +3,9 @@
 setlocale(LC_TIME, 'pt_BR');
 date_default_timezone_set("America/Fortaleza");
 
-$sessionTimeout = 6 * 3600 + 30 * 60; // 6 horas (6 * 3600 segundos) e 30 minutos (30 * 60 segundos)
-ini_set('session.gc_maxlifetime', $sessionTimeout);
-session_set_cookie_params($sessionTimeout);
+//$sessionTimeout = 6 * 3600 + 30 * 60; // 6 horas (6 * 3600 segundos) e 30 minutos (30 * 60 segundos)
+//ini_set('session.gc_maxlifetime', $sessionTimeout);
+//session_set_cookie_params($sessionTimeout);
 
 // Folders
 define("MODEL_PATH",      realpath(dirname(__FILE__) . "/../models"));

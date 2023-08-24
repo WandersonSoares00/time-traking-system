@@ -71,11 +71,17 @@ function getTimeStringFromSeconds($seconds) {
     return sprintf("%02d:%02d:%02d", $h, $m, $s);
 }
 
-function formatDateWithLocale($date, $pattern) {
-    //$time = getDateAsDateTime($date)->getTimestamp();
-    //return strftime($pattern, $time);
-    //setlocale(LC_TIME, 'pt_BR');
+function formatLocalizedDate($date, $format) {
+    $timestamp = $date->getTimestamp();
+    $formatter = new IntlDateFormatter('pt_BR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+    return $formatter->format($timestamp);
+}
 
-    return (getDateAsDateTime($date))->format($pattern);
+function formatDateWithLocale($date, $pattern) {
+    $formattedDate = (getDateAsDateTime($date))->format($pattern);
+    $timestamp = (getDateAsDateTime($date))->getTimestamp();
+    $formatter = new IntlDateFormatter('pt_BR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
+    $formattedDate = $formatter->format($timestamp);
+    return $formattedDate;
 }
 

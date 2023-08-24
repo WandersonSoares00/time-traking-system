@@ -50,7 +50,10 @@ for($yearDiff = 0; $yearDiff <= 0; $yearDiff++) {
         
         //populando o array de períodos com as Strings formatadas
         //$periods[$date->format('Y-m')] = strftime('%B de %Y', $date->getTimestamp());
-        $periods[$date->format('Y-m')] = $date->format('d F Y');
+        //$periods[$date->format('Y-m')] = $date->format('d F Y');
+
+        $periods[$date->format('Y-m')] = formatLocalizedDate($date, 'dd MMMM "de" yyyy');
+
     }
 }
 
@@ -72,23 +75,17 @@ for ($day = 1; $day <= $lastDay; $day++) {
     if ($registry) {
         $sumOfWorkedTime += $registry->worked_time;
         array_push($report, $registry);
-    } 
-    //else {
-    //    array_push($report, new WorkingHours([
-    //        "work_date" => $date,
-    //        "worked_time" => 0
-    //    ]));    }
+    }
 }
 
-define('WEEKLY_TIME', 12 * 60 * 60);
-define('DAILY_TIME', WEEKLY_TIME / 5);
-
-$expectedTime = $workDay * DAILY_TIME;
-$balance = getTimeStringFromSeconds(abs($sumOfWorkedTime - $expectedTime));
-$sign = ($sumOfWorkedTime >= $expectedTime) ? "+" : "-";
+//define('WEEKLY_TIME', 12 * 60 * 60);
+//define('DAILY_TIME', WEEKLY_TIME / 5);
+//$expectedTime = $workDay * DAILY_TIME;
+//$balance = getTimeStringFromSeconds(abs($sumOfWorkedTime - $expectedTime));
+//$sign = ($sumOfWorkedTime >= $expectedTime) ? "+" : "-";
 
 $sumOfWorkedTime = getTimeStringFromSeconds($sumOfWorkedTime);
-$balance = "{$sign}{$balance}";
+//$balance = "{$sign}{$balance}";
 
 $records = WorkingHours::loadFromUserAndDate($user_id, date('Y-m-d'));
 $workedInterval = $records->getWorkedInterval()->format("%H:%I:%S");
